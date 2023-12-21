@@ -28,6 +28,8 @@ class ResourceController extends Controller
             'category_id' => Category::first()->id,
             'creator_id' => $request->user()->id,
         ]);
+
+        return Inertia::location('/');
     }
     
     }
