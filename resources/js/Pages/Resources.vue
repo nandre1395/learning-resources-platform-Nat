@@ -74,7 +74,7 @@ onMounted(() =>{
                         </tr>
                     </thead>
                     <tbody class="bg-white">
-                        <tr v-for="resource in resource" :key="resource.id">
+                        <tr v-for="resource in resources" :key="resource.id">
                             <th csope="row" class="p-6 ">{{ resource.title }}</th> 
                             <th csope="row">
                             <a target="_blank" href="resource.link">Ver Recursos</a>    
