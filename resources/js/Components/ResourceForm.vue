@@ -1,10 +1,17 @@
 <script setup>
 import axios from "axios";
-import {ref} from "vue";
+import { ref, onMounted } from "vue";
 
+    let categories = ref([]);
     let title = ref("");
     let description = ref("");
     let link = ref("");
+
+    onMounted(() => {
+        axios.get("/api/categories").then((response) =>{
+            categories.value = response.data;
+        });
+    });
 
     function createResource(){
        axios
