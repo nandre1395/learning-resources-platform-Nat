@@ -6,6 +6,7 @@ import { ref, onMounted } from "vue";
     let title = ref("");
     let description = ref("");
     let link = ref("");
+    let category_id = ref(null);
 
     onMounted(() => {
         axios.get("/api/categories").then((response) =>{
@@ -32,6 +33,11 @@ import { ref, onMounted } from "vue";
     <input type="text" v-model="title">
     <input type="text" v-model="description">
     <input type="text" v-model="link">
+    <select v-model="category_id">
+        <option v-for="category in categories" :key="category_id" >
+            {{ category.name }}
+        </option>
+    </select>
     <button @click="createResource">Crear Recurso</button>
 </div>
 </template>
