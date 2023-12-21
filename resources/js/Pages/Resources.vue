@@ -13,13 +13,25 @@ const props = defineProps({
  resources: {
     type: Array,
  },
+ categories:{
+    type: Array,
+ }
 });
 
+let filteredcategory = ref(null);
 let search = ref("");
 let filteredResources = ref([]);
 
 watch(search, (value) => {
-    axios.get("/api/resources?search=" + value).then((response) => {
+    axios.
+    get("/api/resources?search=" + value+'&category='+filteredcategory).then((response) => {
+        filteredResources.value = response.data;
+    });
+});
+
+watch(filteredcategory, (value) => {
+    axios
+    .get("/api/resources?category=" + value+'&search='+search.value).then((response) => {
         filteredResources.value = response.data;
     });
 });
@@ -73,7 +85,21 @@ onMounted(() => {
                     />
                 </svg>
             </div>
-            <input type="text" placeholder="Buscar..." v-model="search"/>
+
+            <div>
+                <input type="text" placeholder="Buscar..." v-model="search"/>
+                <select v-model="filteredcategory">
+                    <option value="">Todas las categorias</option>
+                    <option 
+                    v-for="category in categories" 
+                    :key="category.id" 
+                    :value="category.id"
+                    >
+                    {{ category.name }}
+        </option>
+    </select>
+            </div>
+
             <div class="relarive overflow-x-auto, flex justify-center">
                 <table class="w-full text-sm text-left text-gray-500">
                     <thead class="text-lg text-gray-800 uppercase bg-gray-500">
