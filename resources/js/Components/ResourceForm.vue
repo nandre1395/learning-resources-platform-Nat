@@ -1,21 +1,21 @@
 <script setup>
 import axios from "axios";
-import {ref} from "vue"
+import {ref} from "vue";
 
-    let title = ref('');
-    let description = ref('');
-    let link = ref('');
+    let title = ref("");
+    let description = ref("");
+    let link = ref("");
 
     function createResource(){
        axios
-       .post("/api/resources",{
-        title: title.value,
-        description: description.value,
-        link: link.value,
+        .post("/api/resources",{
+             title: title.value,
+             description: description.value,
+             link: link.value,
        })
-       .then((response)=>{
+       .then((response) => {
         console.log(response);
-       })
+       });
     }
 
 </script>

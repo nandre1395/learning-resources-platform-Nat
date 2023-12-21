@@ -14,6 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth')->post('/resources', function (Request $request) {
-    dd($request->all());
-});
+

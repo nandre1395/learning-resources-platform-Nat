@@ -1,6 +1,9 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\Category;
+use App\Models\Resource;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
@@ -30,3 +33,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware('auth')->post('api/resources', [ResourceController::class, 'store']);
