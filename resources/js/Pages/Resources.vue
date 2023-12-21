@@ -3,8 +3,6 @@ import { Head, Link } from '@inertiajs/vue3';
 import axios from 'axios';
 import { onMounted, defineProps, ref, watch } from 'vue';
 
-let search = ref("");
-let filteredResources = ref([]);
 const props = defineProps({
     canLogin: {
         type: Boolean,
@@ -17,9 +15,12 @@ const props = defineProps({
  },
 });
 
-watch(search, (value) =>{
-    axios.get("/resources?search=" + value).then((response) => {
-        props.filteredResources = response.data;
+let search = ref("");
+let filteredResources = ref([]);
+
+watch(search, (value) => {
+    axios.get("/api/resources?search=" + value).then((response) => {
+        filteredResources.value = response.data;
     });
 });
 
@@ -83,7 +84,7 @@ onMounted(() => {
                         </tr>
                     </thead>
                     <tbody class="bg-white">
-                        <tr v-for="resource in resources" :key="resource.id">
+                        <tr v-for="resource in filteredResources" :key="resource.id">
                             <th csope="row" class="p-6 ">{{ resource.title }}</th> 
                             <th csope="row">
                             <a target="_blank" href="resource.link">Ver Recursos</a>    
