@@ -20,9 +20,13 @@ import { ref, onMounted } from "vue";
              title: title.value,
              description: description.value,
              link: link.value,
+             category_id: category_id.value,
        })
        .then((response) => {
-        console.log(response);
+        window.location.href = "/";
+       })
+       .catch((error) => {
+        alert(error.message);
        });
     }
 
@@ -34,7 +38,7 @@ import { ref, onMounted } from "vue";
     <input type="text" v-model="description">
     <input type="text" v-model="link">
     <select v-model="category_id">
-        <option v-for="category in categories" :key="category_id" >
+        <option v-for="category in categories" :key="category_id" :value="category.id">
             {{ category.name }}
         </option>
     </select>
