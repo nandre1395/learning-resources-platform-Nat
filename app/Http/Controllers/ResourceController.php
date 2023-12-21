@@ -16,7 +16,7 @@ class ResourceController extends Controller
         return Inertia ::render('Resources', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
-            'resources' => Resource::with('category')->get(),
+            'resources' => Resource::with('category')->latest()->get(),
         ]);
     }
 
